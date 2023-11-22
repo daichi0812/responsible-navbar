@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    /*フレックスにしたときにパーセンテージを充てやすくなる（？）*/
+    box-sizing: border-box; 
+}
+
+nav{
+    /*navの子タグを横並びに表示する*/
+    display: flex;
+    /*navの子タグの横に対していい感じにスペースをあける*/
+    justify-content: space-around;
+    /*navの子タグの縦に対していい感じに中央に寄せる*/
+    align-items: center;
+    /*最小の高さをビューポートの8%に*/
+    min-height: 8vh;
+    background-color: #364e8b;
+}
+
+.logo{
+    color: white;
+    font-size: 22px;
+}
+
+.nav-links{
+    display: flex;
+    /*子タグの横に対して等間隔にする*/
+    justify-content: space-around;
+    width: 38%;
+}
+
+.nav-links li{
+    /*liタグの箇条書きの・を消す*/
+    list-style: none;
+}
+
+.nav-links a{
+    /*aタグのハイパーリンクっぽいアンダーラインを消す*/
+    text-decoration: none;
+    color: white;
+    /*フォントの太さ*/
+    font-weight: bold;
+}
