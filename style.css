@@ -27,6 +27,8 @@ nav{
     /*子タグの横に対して等間隔にする*/
     justify-content: space-around;
     width: 38%;
+    /*レスポンシブル時に動的にサイドバーが表現される*/
+    transition: all 0.5s ease-in-out;
 }
 
 .nav-links li{
@@ -40,4 +42,102 @@ nav{
     color: white;
     /*フォントの太さ*/
     font-weight: bold;
+}
+
+.burger{
+    /*レスポンシブル時以外の普段はハンバーガー表示しない*/
+    display: none;
+    /*ハンバーガーをクリックできるようにする*/
+    cursor: pointer;
+
+}
+
+.burger div{
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+    /*動的な変化を与える*/
+    transition: all 0.5s ease-in-out;
+}
+
+/*jsでnavに付与するクラスを用意する*/
+.nav-active{
+    /*画面外に置いてたサイドバーを元にもどす*/
+    transform: translateX(0%) !important;
+}
+
+/*レスポンシブル対応させるための魔法*/
+/*最大幅1024pxを下回った時に{}内のことを行うという意味*/
+@media screen and (max-width: 1024px){
+    .nav-links{
+        width: 55%;
+    }
+}
+
+/* 1024px と 768px はブレークポイントと呼ばれる。*/
+@media screen and (max-width: 768px){
+
+    /*x軸にスクロールできないようにする*/
+    body{
+        overflow-x: hidden;
+    }
+
+    /*navリンクたちを移動させる（消す）*/
+    .nav-links{
+        position: absolute;
+        right: 0;
+        /*ヘッダー(8vh)から可視範囲の底辺までの高さ*/
+        height: 92vh;
+        /*可視範囲の上辺から8vhのところを上底とする。*/
+        top: 8vh;
+        background-color: #364e8b;
+        /* liたちを縦並びにする*/
+        flex-direction: column;
+        /*今回は横に対して適応される*/
+        align-items: center;
+        width: 50%;
+        /*レスポンシブル時のサイドバーを最初は画面外に置く*/
+        /*右にスクロールできるようになる*/
+        /* overflow-x: hiddenでスクロールできないようにする*/
+        transform: translateX(100%);
+    }
+
+    /*ナブリンクのliたちを*/
+    .nav-links li{
+        /*最初は透明にする*/
+        opacity: 0;
+    }
+
+    /*ハンバーガーアイコンを表示する*/
+    .burger{
+        /* "display: none"をブロックするイメージ*/
+        display: block;
+    }
+}
+
+/*アニメーションを追加する魔法*/
+@keyframes navLinksFade{
+    0%{
+        /*最初は透明*/
+        opacity: 0;
+        /*右から流れるような表示*/
+        transform: translateX(50px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*クリックした時のハンバーガーを変化させる*/
+.toggle .line1{
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2{
+    opacity: 0;
+}
+.toggle .line3{
+    transform: rotate(405deg) translate(-5px, -6px);
 }
